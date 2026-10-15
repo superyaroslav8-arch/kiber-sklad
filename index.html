@@ -1,1 +1,277 @@
-placeholder
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Киберсклад — Robux, аккаунты, прокачка</title>
+  <meta name="description" content="Киберсклад — Robux, игровые валюты, аккаунты и прокачка. Быстро и надёжно через Telegram.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05070f;
+      --card: #0c1222;
+      --cyan: #00e5ff;
+      --purple: #a855f7;
+      --text: #eef4ff;
+      --muted: #8b9bb8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    .glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 90% 50% at 50% -15%, rgba(0,229,255,0.14), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 90% 50%, rgba(168,85,247,0.1), transparent);
+    }
+    .wrap { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 18px; }
+
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0; flex-wrap: wrap; gap: 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .logo-cube {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, #00e5ff, #a855f7);
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 0 16px rgba(0,229,255,0.45);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-cube::after {
+      content: "";
+      width: 22px; height: 22px;
+      border: 2px solid rgba(255,255,255,0.9);
+      border-radius: 4px;
+      transform: rotate(45deg);
+    }
+    .brand span {
+      font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.2rem;
+      background: linear-gradient(90deg, #fff, var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav { display: flex; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 18px; border-radius: 11px; font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; transition: 0.2s;
+    }
+    .btn-blue { background: linear-gradient(135deg, #0088cc, #00aaff); color: #fff; box-shadow: 0 4px 16px rgba(0,136,204,0.35); }
+    .btn-blue:hover { transform: translateY(-2px); }
+    .btn-ghost { border: 1px solid rgba(0,229,255,0.4); color: var(--cyan); background: transparent; }
+    .btn-ghost:hover { background: rgba(0,229,255,0.1); }
+
+    .hero { text-align: center; padding: 40px 0 50px; }
+    .hero-logo {
+      width: 110px; height: 110px; margin: 0 auto 24px;
+      background: linear-gradient(145deg, #00e5ff, #a855f7);
+      border-radius: 22px;
+      box-shadow: 0 0 40px rgba(0,229,255,0.4);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .hero-logo::before {
+      content: "";
+      width: 48px; height: 48px;
+      border: 3px solid rgba(255,255,255,0.95);
+      border-radius: 8px;
+      transform: rotate(45deg);
+    }
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif; font-size: clamp(1.85rem, 5vw, 2.8rem);
+      font-weight: 700; line-height: 1.2; margin-bottom: 14px;
+      background: linear-gradient(135deg, #fff 20%, var(--cyan) 60%, var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto 26px; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-main {
+      padding: 14px 28px; border-radius: 13px; font-weight: 700; font-size: 1rem;
+      background: linear-gradient(135deg, var(--cyan), #00b8d4); color: #001018;
+      text-decoration: none; box-shadow: 0 0 26px rgba(0,229,255,0.35);
+    }
+    .btn-main:hover { transform: translateY(-2px); }
+
+    section { padding: 16px 0 48px; }
+    .title { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; text-align: center; margin-bottom: 8px; }
+    .sub { text-align: center; color: var(--muted); margin-bottom: 26px; font-size: 0.98rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--card); border: 1px solid rgba(0,229,255,0.12);
+      border-radius: 16px; padding: 24px 20px; transition: 0.25s;
+    }
+    .card:hover { border-color: rgba(0,229,255,0.35); transform: translateY(-4px); }
+    .card .icon {
+      width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 14px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(168,85,247,0.12));
+      border: 1px solid rgba(0,229,255,0.2);
+    }
+    .card h3 { font-size: 1.12rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 0.93rem; margin-bottom: 12px; }
+    .card ul { list-style: none; color: var(--muted); font-size: 0.88rem; }
+    .card li { padding: 3px 0 3px 16px; position: relative; }
+    .card li::before { content: "•"; position: absolute; left: 0; color: var(--cyan); }
+
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .step {
+      text-align: center; padding: 20px 14px;
+      background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.1); border-radius: 14px;
+    }
+    .step .num { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--cyan); margin-bottom: 6px; }
+    .step h4 { margin-bottom: 6px; font-size: 1rem; }
+    .step p { color: var(--muted); font-size: 0.88rem; }
+
+    .why {
+      background: linear-gradient(145deg, rgba(0,229,255,0.05), rgba(168,85,247,0.05));
+      border: 1px solid rgba(0,229,255,0.18); border-radius: 18px; padding: 32px 24px; text-align: center;
+    }
+    .why p { color: var(--muted); max-width: 600px; margin: 0 auto 20px; font-size: 1.02rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+    .tag { display: flex; align-items: center; gap: 6px; font-weight: 500; }
+    .tag span { color: var(--cyan); }
+
+    .contact { text-align: center; padding-bottom: 60px; }
+    .contact h2 { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .contact p { color: var(--muted); margin-bottom: 16px; }
+    .phone {
+      font-family: 'Orbitron', sans-serif; font-size: 1.35rem; letter-spacing: 1.5px;
+      color: var(--cyan); display: block; margin-bottom: 22px; text-decoration: none;
+    }
+    .contact-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06); padding: 20px 0;
+      text-align: center; color: var(--muted); font-size: 0.85rem;
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    @media (max-width: 500px) {
+      .hero-logo { width: 90px; height: 90px; }
+      .phone { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="wrap">
+
+    <header>
+      <a href="#" class="brand">
+        <div class="logo-cube"></div>
+        <span>КИБЕРСКЛАД</span>
+      </a>
+      <div class="nav">
+        <a href="https://t.me/Cyberwarehouse_News" class="btn btn-ghost" target="_blank">Канал</a>
+        <a href="https://t.me/+79388750405" class="btn btn-blue" target="_blank">Написать</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-logo"></div>
+      <h1>Цифровой склад<br>игровых ценностей</h1>
+      <p>Robux, игровые валюты, готовые аккаунты и прокачка. Быстро, надёжно, только через Telegram.</p>
+      <div class="hero-btns">
+        <a href="https://t.me/+79388750405" class="btn-main" target="_blank">Написать в Telegram</a>
+        <a href="https://t.me/Cyberwarehouse_News" class="btn btn-ghost" target="_blank">Наш канал</a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title">Что мы продаём</h2>
+      <p class="sub">Три направления — выбери нужное</p>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">💎</div>
+          <h3>Токены и валюты</h3>
+          <p>Robux и другие электронные монеты.</p>
+          <ul>
+            <li>Быстрая доставка</li>
+            <li>Выгодные цены</li>
+            <li>Проверенные способы</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="icon">👤</div>
+          <h3>Готовые аккаунты</h3>
+          <p>Аккаунты под любые задачи.</p>
+          <ul>
+            <li>Чистые аккаунты</li>
+            <li>Нужный уровень</li>
+            <li>Безопасная передача</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>Прокачка</h3>
+          <p>Профессиональная прокачка любого уровня.</p>
+          <ul>
+            <li>Быстро и аккуратно</li>
+            <li>Гарантия результата</li>
+            <li>Любые игры</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="title">Как это работает</h2>
+      <p class="sub">Три простых шага</p>
+      <div class="steps">
+        <div class="step">
+          <div class="num">01</div>
+          <h4>Напиши нам</h4>
+          <p>В Telegram по кнопке или номеру</p>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <h4>Выбери товар</h4>
+          <p>Robux, аккаунт или прокачку</p>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <h4>Получи</h4>
+          <p>После оплаты сразу отдаём</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="why">
+        <h2 class="title" style="margin-bottom:14px">Почему Киберсклад</h2>
+        <p>Работаем только через Telegram. Каждый заказ обрабатываем вручную. Новости и акции — в канале.</p>
+        <div class="tags">
+          <div class="tag"><span>✓</span> Быстро</div>
+          <div class="tag"><span>✓</span> Надёжно</div>
+          <div class="tag"><span>✓</span> Выгодно</div>
+          <div class="tag"><span>✓</span> 100% цифровой товар</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <h2>Связаться</h2>
+      <p>Все заказы — только через Telegram</p>
+      <a href="https://t.me/+79388750405" class="phone" target="_blank">+7 938 875 0405</a>
+      <div class="contact-btns">
+        <a href="https://t.me/+79388750405" class="btn-main" target="_blank">Написать</a>
+        <a href="https://t.me/Cyberwarehouse_News" class="btn btn-ghost" target="_blank">Канал</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      © 2026 Киберсклад · <a href="https://t.me/Cyberwarehouse_News" target="_blank">Канал</a> · <a href="https://t.me/+79388750405" target="_blank">Telegram</a>
+    </div>
+  </footer>
+</body>
+</html>
